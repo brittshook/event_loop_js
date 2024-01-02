@@ -1,9 +1,9 @@
 let count = 0;
 
-function increment() {
+const increment = () => {
   count++;
   increment();
-}
+};
 
 try {
   increment();
@@ -34,3 +34,26 @@ const trampoline = (f, ...args) => {
 };
 
 console.log(trampoline(flatten([5, [3, 4], [4, [4, [4]]]])));
+
+const p = document.querySelector("p");
+
+const isPrime = (n) => {
+  if (n < 2) return false;
+  for (let div = 2; div <= Math.sqrt(n); div++) {
+    if (n % div === 0) return false;
+  }
+  return true;
+};
+
+const primeList = (n, current = 2, primes = []) => {
+  while (current <= n) {
+    if (isPrime(current)) {
+      primes.push(current);
+    }
+    current++;
+  }
+  return primes.join(", ");
+};
+
+p.textContent = primeList(10000);
+setTimeout(() => window.alert("Prime calculations complete"), 100);
